@@ -87,9 +87,10 @@ input{
     border: none;
     outline: none;
     padding: 30px 40px;
+    margin-bottom: 5px ;
     background: #349cfc;
     color: white;
-    font-size: 30px;
+    font-size: 25px;
     cursor: pointer;
     border-radius: 30px;
     transition-duration: 0.5ms;
@@ -139,12 +140,19 @@ input{
 }
 
 ul li{
-    list-style: none;
+    list-style: disc;
     font-size: 17px;
-    padding: 12px 8px 12px 50px;
+    padding: 12px 20px 12px -20px;
     user-select: none;
     cursor: pointer;
     position: relative;
+    margin-bottom: 15px;
+}
+
+#list-container{
+    padding-left: 30px;
+    padding-right: 0px;
+    margin-top: 10px;
 }
 
 
@@ -157,7 +165,7 @@ ul li::before{
     background-size: cover;
     background-position: center;
     top: 12px;
-    left: 8px;
+    left: 0px;
 }
 
 ul li.checked{

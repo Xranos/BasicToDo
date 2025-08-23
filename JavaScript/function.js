@@ -1,21 +1,27 @@
 const input = document.getElementById("input")
-const listContainer = document.getElementById("list-container")
+const date = document.getElementById("input-date")
+const listContainer = document.getElementById("list-container");
+
 
 function addTodo(){
-    if(input.value === ""){
-        alert("You must type a to-do!");
-    }
-    else{
+    const inputVal = input.value.trim();
+    const dateVal = date.value;
+    switch(true){
+        case inputVal === "" || dateVal === "":
+        alert("You must type a to-do and input a date!");
+        break;
+
+    default:
         let li = document.createElement("li");
-        li.innerHTML = input.value;
+        li.innerHTML = inputVal + " | " + dateVal;
         listContainer.appendChild(li)
 
         let span = document.createElement("span");
         span.innerHTML = "\u00d7"
         li.appendChild(span)
     }
-    input.value = "";
     saveData();
+    showTodo();
 }
 
 listContainer.addEventListener("click", function(e){
@@ -33,8 +39,32 @@ function saveData(){
     localStorage.setItem("data", listContainer.innerHTML);
 }
 
+function clearConf(){
+    const inputVal = input.value.trim();
+    const dateVal = date.value;
+    if (inputVal === "" || dateVal === ""){
+        alert("You need to have atleast one to-do")
+    }
+    else{
+        let clearConfirm = confirm('Are you sure you want to delete all to-dos?');
+        switch(clearConfirm){
+            case true:
+                clearTodos();
+                break;
+
+            default:
+                break;
+        }
+    }
+}
+
+function clearTodos(){
+    localStorage.clear();
+    showTodo();
+}
+
 function showTodo(){
     listContainer.innerHTML = localStorage.getItem("data");
 }
 
-showTodo()
+showTodo();
