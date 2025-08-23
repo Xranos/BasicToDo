@@ -109,20 +109,49 @@ input{
     margin-top: -20px;
 }
 
+.select-container{
+    position: relative;
+}
 
-#filter-button{
+#filter-select{
     border: none;
+    appearance: none;
     border-radius: 30px;
     background: #349cfc;
     color: white ;
     max-height: 300px;
-    padding: 10px 35px 10px;
+    padding: 8px 35px 8px 5px;
     cursor: pointer;
+    text-align: center;
+    outline: none;
+
 }
 
-#filter-button:hover{
+#filter-select:hover{
     background-color: #0460b5;
 }
+
+#filter-select option{
+    background: #349cfc;
+    padding: 12px 20px;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 0;
+}
+
+.select-container::after{
+    content: '▼';
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none;
+    font-size: 10px;
+
+}
+
 
 #clear-button{
     border: none;
@@ -130,7 +159,7 @@ input{
     background: red;
     color: white ;
     max-height: 300px;
-    padding: 10px 35px 10px;
+    padding: 8px 35px 8px;
     cursor: pointer;
     text-align: center;
 }

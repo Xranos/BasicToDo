@@ -20,7 +20,15 @@
                 <button id="add-button" onclick="addTodo()"><b>+</b></button>
             </div>    
             <div class="row2">
-                <button id ="filter-button">Filter</button>
+                <div class="select-container">
+                    <select name="filter-type" id="filter-select">
+                    <option value="">Filter</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="newest">Newest</option>
+                </select>
+                </div>
+
+                <!-- <button id ="filter-button">Filter</button> -->
                 <button id ="clear-button" onclick="clearConf()">Clear</button>
             </div>
             <ul id="list-container"></ul>
