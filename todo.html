@@ -10,16 +10,20 @@
     <div class="whole-container">
         <div class="todoapp">
             <h1><img src="Asset/IconTodo.png" alt="A To-Do List Icon" class="icon-todo"> <bold>Basic To-Do List</b></h1>
+
+           
             <div class="row">
+                 <div class="column1">
                 <input type="text" id="input" placeholder="Type your todo here..">
-                <button id="add-button" onclick="addTodo()"><b>ADD</b></button>
+                <input type="date" id="input-date" >
+            </div>
+                <button id="add-button" onclick="addTodo()"><b>+</b></button>
             </div>    
-            
-            <ul id="list-container">
-                <!-- <li class="checked">Task1</li>
-                <li>Task2</li>
-                <li>Task3</li> -->
-            </ul>
+            <div class="row2">
+                <button id ="filter-button">Filter</button>
+                <button id ="clear-button">Clear</button>
+            </div>
+            <ul id="list-container"></ul>
         </div>
     </div>
 

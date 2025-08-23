@@ -36,39 +36,106 @@
     margin: 0px 15px 0px 0px  ;
 }
 
+.column1{
+    display: flex;
+    flex-direction: column;
+}
+
 .row{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #d1d1d1;
+    /* background: #d1d1d1; */
     border-radius: 30px;
-    padding-left: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin-bottom: 25px;
 }
 
+/* #input-date{
+    background: red;
+} */
+
 input{
+    margin-right: 10px;
+    width: 350px;
+}
+
+#input{
     flex: 1;
     border: none;
     outline: none;
-    background: transparent;
+    background: #d1d1d1;
+    margin-bottom: 5px;
     padding: 10px;
     font-weight: 15px;
+    border-radius: 30px;
+}
+
+#input-date{
+    flex: 1;
+    border: none;
+    outline: none;
+    background: #d1d1d1;
+    padding: 10px;
+    margin-top: 5px;
+    font-weight: 15px;
+    border-radius: 30px;
 }
 
 #add-button{
     border: none;
     outline: none;
-    padding: 16px 50px;
+    padding: 30px 40px;
     background: #349cfc;
     color: white;
-    font-size: 15px;
+    font-size: 30px;
     cursor: pointer;
-    border-radius: 40px;
+    border-radius: 30px;
     transition-duration: 0.5ms;
 }
 
 #add-button:hover{
     background-color: #0460b5;
+}
+
+.row2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 5px;
+    margin-top: -20px;
+}
+
+
+#filter-button{
+    border: none;
+    border-radius: 30px;
+    background: #349cfc;
+    color: white ;
+    max-height: 300px;
+    padding: 10px 35px 10px;
+    cursor: pointer;
+}
+
+#filter-button:hover{
+    background-color: #0460b5;
+}
+
+#clear-button{
+    border: none;
+    border-radius: 30px;
+    background: red;
+    color: white ;
+    max-height: 300px;
+    padding: 10px 35px 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#clear-button:hover{
+    background-color: rgb(139, 0, 0);
 }
 
 ul li{
@@ -79,6 +146,7 @@ ul li{
     cursor: pointer;
     position: relative;
 }
+
 
 ul li::before{
     content: '';
