@@ -10,25 +10,26 @@
     <div class="whole-container">
         <div class="todoapp">
             <h1><img src="Asset/IconTodo.png" alt="A To-Do List Icon" class="icon-todo"> <bold>Basic To-Do List</b></h1>
-
-           
             <div class="row">
                  <div class="column1">
                 <input type="text" id="input" placeholder="Type your todo here..">
                 <input type="date" id="input-date" >
             </div>
                 <button id="add-button" onclick="addTodo()"><b>+</b></button>
-            </div>    
+            </div> 
             <div class="row2">
-                <div class="select-container">
-                    <select name="filter-type" id="filter-select">
-                    <option value="">Filter</option>
-                    <option value="oldest">Oldest</option>
-                    <option value="newest">Newest</option>
-                </select>
-                </div>
+                <div class="dropdown">
+                    <input type="text" id="test" class="textBox" placeholder="Filter" readonly >
+                        <div class="option">
+                            <div onclick="show('Newest')">
+                                <p>Newest</p>
+                            </div>
 
-                <!-- <button id ="filter-button">Filter</button> -->
+                            <div onclick="show('Oldest')">
+                                <p>Oldest</p>
+                            </div>
+                    </div>
+                </div>
                 <button id ="clear-button" onclick="clearConf()">Clear</button>
             </div>
             <ul id="list-container"></ul>
@@ -36,5 +37,18 @@
     </div>
 
     <script src="Javascript\function.js"></script>
+
+    <script type="text/Javascript" charset="UTF-8">
+        function  show(anything) {
+            document.querySelector('.textBox').value = anything;
+
+        }
+
+        let dropdown = document.querySelector('.dropdown');
+        dropdown.onclick = function () {
+            dropdown.classList.toggle('active')
+        }
+
+    </script>
 </body>
 </html>

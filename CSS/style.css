@@ -19,7 +19,7 @@
     max-width: 550px;
     background-color: white;
     margin: 125px auto 20px;
-    padding: 50px  30px 70px;
+    padding: 50px  30px 50px;
     border-radius: 10px;
 }
 
@@ -69,7 +69,7 @@ input{
     margin-bottom: 5px;
     padding: 10px;
     font-weight: 15px;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 #input-date{
@@ -80,19 +80,19 @@ input{
     padding: 10px;
     margin-top: 5px;
     font-weight: 15px;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 #add-button{
     border: none;
     outline: none;
-    padding: 30px 40px;
+    padding: 30px 34px;
     margin-bottom: 5px ;
     background: #349cfc;
     color: white;
     font-size: 25px;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 10px;
     transition-duration: 0.5ms;
 }
 
@@ -105,57 +105,98 @@ input{
     flex-direction: row;
     justify-content: space-between;
     padding-left: 20px;
-    padding-right: 5px;
-    margin-top: -20px;
+    padding-right: 20px;
+    margin-top: -18px;
 }
 
-.select-container{
+.dropdown{
     position: relative;
+    width: 100px;
 }
 
-#filter-select{
-    border: none;
-    appearance: none;
-    border-radius: 30px;
-    background: #349cfc;
-    color: white ;
-    max-height: 300px;
-    padding: 8px 35px 8px 5px;
-    cursor: pointer;
-    text-align: center;
-    outline: none;
-
-}
-
-#filter-select:hover{
-    background-color: #0460b5;
-}
-
-#filter-select option{
-    background: #349cfc;
-    padding: 12px 20px;
-    border: none;
-    text-align: center;
-    font-size: 14px;
-    border-radius: 0;
-}
-
-.select-container::after{
-    content: '▼';
+.dropdown::before{
+    content: "";
     position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: white;
+    right: 9px;
+    top: 10px;
+    z-index: 10000;
+    width: 5px;
+    height: 5px;
+    border: 2px solid white ;
+    border-top: 2px solid #349cfc;
+    border-right: 2px solid #349cfc;
+    transform: rotate(-45deg);
+    transition: 0.5ms;
     pointer-events: none;
-    font-size: 10px;
+    
+}
 
+.dropdown.active::before{
+    top: 15px;
+    transform: rotate(-225deg);
+}
+
+.dropdown .textBox{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background:  #349cfc;
+    border: none;
+    outline: none;
+    padding: 12px 10px;
+    border-radius: 10px;
+    color: white ;
+    font-size: 14px;
+}
+
+input.textBox::placeholder {
+    color: white;
+    opacity: 1; 
+    font-size: 14px;
+}
+
+.dropdown .option{
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background: #349cfc;
+    overflow: hidden;
+    display: none;
+    border-radius: 10px;
+    margin-top: 1px;
+    z-index: 9999;
+    color: white;
+}
+
+.dropdown.active .option{
+    display: block;
+}
+
+.dropdown .option div{
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.dropdown .option div{
+    background-color:349cfc ;
+    /* background: #62baea; */
+}
+
+.dropdown.option div i {
+    position: absolute;
+    top: 4px;
+    font-size: 1.2em;
+}
+
+.dropdown.active + #list-container {
+    padding-bottom: 80px; /* Adjust as needed */
 }
 
 
 #clear-button{
     border: none;
-    border-radius: 30px;
+    border-radius: 10px;
     background: red;
     color: white ;
     max-height: 300px;

@@ -42,7 +42,7 @@ function saveData(){
 function clearConf(){
     const inputVal = input.value.trim();
     const dateVal = date.value;
-    if (inputVal === "" || dateVal === ""){
+    if (localStorage.length === 0){
         alert("You need to have atleast one to-do")
     }
     else{
@@ -66,7 +66,6 @@ function clearTodos(){
 function showTodo(){
     listContainer.innerHTML = localStorage.getItem("data");
 }
-
 
 
 showTodo();
