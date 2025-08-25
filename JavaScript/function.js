@@ -1,7 +1,18 @@
-const input = document.getElementById("input");
-const date = document.getElementById("input-date");
-const listContainer = document.getElementById("list-container");
 const LS_KEY = "todos";
+
+function show(val) {
+  const box = document.getElementById("input-dropdown");
+  box.value = val;                 
+  displayTodos();          
+  const wrapper = box.closest('.dropdown');
+  if (wrapper) wrapper.classList.remove('active');
+}
+
+function changeFilter() {
+    const valueDropdown = document.getElementById('input-dropdown').value;
+    displayTodos();
+}
+
 
 function loadTodos() {
   try {
@@ -17,6 +28,8 @@ function saveTodos(arr) {
 }
 
 function addTodo(){
+    const input = document.getElementById("input");
+    const date  = document.getElementById("input-date");
     const inputVal = input.value.trim();
     const dateVal = date.value;
 
@@ -35,20 +48,41 @@ function addTodo(){
 }
 
 function clearTodos(){
-    todos = [];
-    saveTodos(todos);
+    saveTodos([]);
     displayTodos();
+}
+
+function getOrder() {
+  const el = document.getElementById("input-dropdown");
+  const v = (el && el.value ? el.value : "Newest").trim().toLowerCase();
+  console.log("Current dropdown value:", v); // Debug log
+  return v.startsWith("new") ? "newest" : "oldest";
 }
 
 
 function displayTodos() {
     const listContainer = document.getElementById("list-container");
+
     listContainer.innerHTML = "";
+    if (!listContainer) {
+        console.log("List container not found!");
+        return;
+    }
+    let todos = loadTodos();
 
-    let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  const order = getOrder();
 
+   console.log("order:", order, "before:", todos.map(t => t.dueDate));
 
-  todos.forEach((item, index) => {
+  todos.sort((a, b) =>
+    order === "newest"
+      ? b.dueDate.localeCompare(a.dueDate)   // later dates first
+      : a.dueDate.localeCompare(b.dueDate)   // earlier dates first
+  );
+
+   console.log("after:", todos.map(t => t.dueDate));
+
+    todos.forEach((item, index) => {
     const todoItem = document.createElement("li");
     todoItem.className = "todo-item";
 
@@ -103,6 +137,5 @@ function clearConf(){
 }
 
 document.addEventListener("DOMContentLoaded", displayTodos);
-
 
 
