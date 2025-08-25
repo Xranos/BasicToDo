@@ -123,8 +123,8 @@ input{
     width: 5px;
     height: 5px;
     border: 2px solid white ;
-    border-top: 2px solid #349cfc;
-    border-right: 2px solid #349cfc;
+    border-top: transparent;
+    border-right: transparent;
     transform: rotate(-45deg);
     transition: 0.5ms;
     pointer-events: none;
@@ -150,6 +150,10 @@ input{
     font-size: 14px;
 }
 
+.dropdown .textBox:hover{
+    background-color: #0460b5;
+}
+
 input.textBox::placeholder {
     color: white;
     opacity: 1; 
@@ -162,16 +166,28 @@ input.textBox::placeholder {
     width: 100%;
     background: #349cfc;
     overflow: hidden;
-    display: none;
+    /* display: none; */
     border-radius: 10px;
     margin-top: 1px;
     z-index: 9999;
     color: white;
+
+    opacity: 0;
+    transform: translateY(-10px); 
+    pointer-events: none; 
+    transition: opacity 0.3s ease, transform 0.3s ease; 
 }
 
 .dropdown.active .option{
-    display: block;
+    opacity: 1; 
+    transform: translateY(5px); 
+    pointer-events: auto; 
 }
+
+.dropdown .option div:hover{
+    background-color: #0460b5;
+}
+
 
 .dropdown .option div{
     padding: 12px 20px;
@@ -180,7 +196,6 @@ input.textBox::placeholder {
 
 .dropdown .option div{
     background-color:349cfc ;
-    /* background: #62baea; */
 }
 
 .dropdown.option div i {
@@ -190,7 +205,8 @@ input.textBox::placeholder {
 }
 
 .dropdown.active + #list-container {
-    padding-bottom: 80px; /* Adjust as needed */
+    padding-bottom: 80px; 
+
 }
 
 
@@ -226,18 +242,6 @@ ul li{
 }
 
 
-ul li::before{
-    content: '';
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    top: 12px;
-    left: 0px;
-}
-
 ul li.checked{
     color: grey ;
     text-decoration: line-through;
@@ -245,23 +249,48 @@ ul li.checked{
 
 ul li.check::before{
     color: grey;
+} */
+
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
 }
 
-ul li span{
-    position: absolute;
-    right: 20px;
-    top: 5px;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-    color: #349cfc;
-    line-height: 40px;
-    text-align: center;
-    transition-duration: 1ms;
+.btn-group {
+  display: flex;
+  gap: 10px; /* equal spacing between buttons */
 }
 
-ul li span:hover{
-   background: #e0e0e0;
-   border-radius: 20px;
-   color: red;
+.delete-btn,
+.edit-btn {
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  padding: 5px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  margin: 0;
 }
+
+.delete-btn:hover{
+    background: #e0e0e0;
+    border-radius: 30px;
+    padding: 5px 8px;
+    color: red;
+}
+
+
+.edit-btn:hover{
+    background: #e0e0e0;
+    border-radius: 30px;
+    padding: 5px 8px;
+} 
+
+
+

@@ -1,71 +1,108 @@
-const input = document.getElementById("input")
-const date = document.getElementById("input-date")
+const input = document.getElementById("input");
+const date = document.getElementById("input-date");
 const listContainer = document.getElementById("list-container");
+const LS_KEY = "todos";
 
+function loadTodos() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
+}
+function saveTodos(arr) {
+  localStorage.setItem(LS_KEY, JSON.stringify(arr));
+}
 
 function addTodo(){
     const inputVal = input.value.trim();
     const dateVal = date.value;
-    switch(true){
-        case inputVal === "" || dateVal === "":
+
+    if(inputVal === "" || dateVal === ""){
         alert("You must type a to-do and input a date!");
-        break;
-
-    default:
-        let li = document.createElement("li");
-        li.innerHTML = inputVal + " | " + dateVal;
-        listContainer.appendChild(li)
-
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7"
-        li.appendChild(span)
+        return;
     }
-    saveData();
-    showTodo();
-}
 
-listContainer.addEventListener("click", function(e){
-    if(e.target.tagName === "LI"){
-        e.target.classList.toggle("checked");
-        saveData();
-    }
-    else if(e.target.tagName ==="SPAN"){
-        e.target.parentElement.remove();
-        saveData();
-    }
-}, false)
+    let todos = loadTodos();
+    todos.push({task: inputVal, dueDate: dateVal})
+    saveTodos(todos);
 
-function saveData(){
-    localStorage.setItem("data", listContainer.innerHTML);
-}
-
-function clearConf(){
-    const inputVal = input.value.trim();
-    const dateVal = date.value;
-    if (localStorage.length === 0){
-        alert("You need to have atleast one to-do")
-    }
-    else{
-        let clearConfirm = confirm('Are you sure you want to delete all to-dos?');
-        switch(clearConfirm){
-            case true:
-                clearTodos();
-                break;
-
-            default:
-                break;
-        }
-    }
+    input.value = "";
+    date.value = "";
+    displayTodos();
 }
 
 function clearTodos(){
-    localStorage.clear();
-    showTodo();
-}
-
-function showTodo(){
-    listContainer.innerHTML = localStorage.getItem("data");
+    todos = [];
+    saveTodos(todos);
+    displayTodos();
 }
 
 
-showTodo();
+function displayTodos() {
+    const listContainer = document.getElementById("list-container");
+    listContainer.innerHTML = "";
+
+    let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+
+  todos.forEach((item, index) => {
+    const todoItem = document.createElement("li");
+    todoItem.className = "todo-item";
+
+    const taskSpan = document.createElement("span");
+    taskSpan.className = "task";
+    taskSpan.textContent = `${item.task} - ${item.dueDate}`;
+
+    const btnGroup = document.createElement("div");
+    btnGroup.className = "btn-group";
+
+    const editButton = document.createElement("button");
+    editButton.className = "edit-btn";
+    editButton.textContent = "✏️";
+    editButton.onclick = () => editTodo(index);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "delete-btn";
+    deleteButton.textContent = "✖";
+    deleteButton.onclick = () => deleteTodo(index);
+
+    btnGroup.appendChild(editButton);
+    btnGroup.appendChild(deleteButton);
+
+    todoItem.appendChild(taskSpan);
+    todoItem.appendChild(btnGroup);
+
+    listContainer.appendChild(todoItem);
+  });
+}
+
+function deleteTodo(index) {
+    const todos = loadTodos();
+    if (index >=0 && index < todos.length) {
+        todos.splice(index, 1);
+        saveTodos(todos);
+        displayTodos();
+    }
+}
+
+
+function clearConf(){
+    const todos = loadTodos();
+    if(todos.length === 0){
+        alert("No to-dos to clear!");
+        return;
+    }
+
+    const confirmation = confirm("Are you sure you want to clear all to-dos?");
+    if(confirmation){
+        clearTodos();
+    }
+}
+
+document.addEventListener("DOMContentLoaded", displayTodos);
+
+
+
